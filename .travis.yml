@@ -17,6 +17,9 @@ env:
   global:
   - PGPORT=5432
 
+before_install:
+  - chmod +x mvnw
+
 before_script:
   - psql -c 'CREATE DATABASE IF NOT EXISTS ProzorroTest;' -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';;" -U postgres
