@@ -76,7 +76,7 @@ class EndpointDataBuilderTest {
         EndpointData endpointData = EndpointDataBuilder.getInstance().data(list).endpoint("mock").build();
 
         //Then
-        assertThat(endpointData.getData()).isEqualTo(list);
+        assertThat(endpointData.getData()).containsExactlyInAnyOrder(dataItem);
         assertThat(endpointData).isEqualToIgnoringGivenFields(expected, "data");
     }
 }

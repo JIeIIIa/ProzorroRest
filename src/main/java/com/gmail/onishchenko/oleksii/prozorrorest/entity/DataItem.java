@@ -17,6 +17,7 @@ public class DataItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_in_db")
     private Long idInDB;
 
     @NotEmpty
@@ -159,8 +160,7 @@ public class DataItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DataItem dataItem = (DataItem) o;
-        return Objects.equals(idInDB, dataItem.idInDB) &&
-                Objects.equals(hash, dataItem.hash) &&
+        return Objects.equals(hash, dataItem.hash) &&
                 language == dataItem.language &&
                 Objects.equals(description, dataItem.description) &&
                 format == dataItem.format &&
@@ -176,6 +176,6 @@ public class DataItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idInDB, hash, language, description, format, url, title, documentOf, datePublished, dateModified, documentType, id, relatedItem);
+        return Objects.hash(hash, language, description, format, url, title, documentOf, datePublished, dateModified, documentType, id, relatedItem);
     }
 }

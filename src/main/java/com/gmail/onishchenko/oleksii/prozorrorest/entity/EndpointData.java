@@ -2,6 +2,7 @@ package com.gmail.onishchenko.oleksii.prozorrorest.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,8 +16,10 @@ public class EndpointData {
     @NotEmpty
     private String endpoint;
 
-    @OneToMany(mappedBy = "idInDB")
-    private List<DataItem> data;
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JoinColumn(name = "endpoint_data_id")
+    private List<DataItem> data = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -39,7 +42,10 @@ public class EndpointData {
     }
 
     public void setData(List<DataItem> data) {
-        this.data = data;
+        this.data.clear();
+        if (Objects.nonNull(data)) {
+            this.data.addAll(data);
+        }
     }
 
     @Override
@@ -47,14 +53,13 @@ public class EndpointData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EndpointData that = (EndpointData) o;
-        return Objects.equals(id, that.id) &&
-                endpoint.equals(that.endpoint) &&
+        return endpoint.equals(that.endpoint) &&
                 Objects.equals(data, that.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, endpoint, data);
+        return Objects.hash(endpoint, data);
     }
 
     @Override
