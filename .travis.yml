@@ -12,11 +12,12 @@ addons:
   postgresql: "10"
   apt:
     packages:
-    - postgresql-10
-    - postgresql-client-10
+      - postgresql-10
+      - postgresql-client-10
 env:
   global:
-  - PGPORT=5432
+    - PGPORT=5432
+    - PGHOST=localhost
 
 before_install:
   - chmod +x mvnw
