@@ -20,8 +20,8 @@ before_install:
   - chmod +x mvnw
 
 before_script:
-  - psql -c 'CREATE DATABASE ProzorroTest;' -U postgres
-  - psql -c "ALTER USER postgres WITH PASSWORD 'password';;" -U postgres
+  - psql -c 'create database "ProzorroTest";' -U postgres
+  - psql -c 'alter user postgres with password "password";' -U postgres
 
 script:
   - mvn clean install -B
