@@ -15,13 +15,15 @@ env:
   global:
     - PGPORT=5432
     - PGHOST=localhost
+    - PGDATABASE=prozorro-test
 
 before_install:
   - chmod +x mvnw
+  - sudo service postgresql restart
+  - sleep 1
 
 before_script:
-  - psql -c "CREATE DATABASE ProzorroTest;" -U postgres
-  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'password'"
+#  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'password'"
 
 script:
   - mvn clean install -B
