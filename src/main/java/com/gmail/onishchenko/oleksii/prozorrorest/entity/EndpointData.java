@@ -2,13 +2,17 @@ package com.gmail.onishchenko.oleksii.prozorrorest.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "endpoint_data")
 @Table(name = "endpoint_data")
-public class EndpointData {
+public class EndpointData implements Serializable {
+
+    private static final long serialVersionUID = 4199784100351949865L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

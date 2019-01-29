@@ -6,13 +6,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Entity(name = "data_item")
 @Table(name = "data_item")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DataItem {
+public class DataItem implements Serializable {
+
+    private static final long serialVersionUID = 8574001078422337323L;
+
     private static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX";
 
     @Id
