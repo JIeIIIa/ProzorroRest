@@ -22,9 +22,9 @@ before_install:
   - sleep 1
 
 before_script:
-  - psql -c "CREATE DATABASE prozorrotest;" -U postgres
+  - sudo psql -c "CREATE DATABASE prozorrotest;" -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'password'"
-  - psql -c 'CREATE SCHEMA "public" AUTHORIZATION postgres;' -U postgres -d prozorrotest
+  - sudo psql -c 'CREATE SCHEMA "public" AUTHORIZATION postgres;' -U postgres -d prozorrotest
 
 script:
   - mvn clean install -B
