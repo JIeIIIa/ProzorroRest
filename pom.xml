@@ -11,7 +11,7 @@
     <groupId>com.gmail.onishchenko.oleksii</groupId>
     <artifactId>prozorro-rest</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>prozorro-rest</name>
     <description>Test task for IT Contract</description>
@@ -27,6 +27,8 @@
 
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+        <heroku-maven-plugin.version>2.0.6</heroku-maven-plugin.version>
+        <heroku-maven-plugin.appName>prozorro-rest</heroku-maven-plugin.appName>
         <okhttp.version>3.12.1</okhttp.version>
     </properties>
 
@@ -130,6 +132,14 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine}</argLine>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
@@ -165,6 +175,23 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>${coveralls-maven-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>${heroku-maven-plugin.version}</version>
+                <configuration>
+                    <appName>${heroku-maven-plugin.appName}</appName>
+                    <jdkVersion>${java.version}</jdkVersion>
+                    <includeTarget>false</includeTarget>
+                    <includes>
+                        <include>target/${application.fullName}</include>
+                    </includes>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -jar target/${application.fullName}</web>
+                    </processTypes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
