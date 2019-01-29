@@ -1,8 +1,11 @@
 #ProzorroRest
 
+[![Build Status](https://travis-ci.org/JIeIIIa/ProzorroRest.svg?branch=master)](https://travis-ci.org/JIeIIIa/ProzorroRest)
+
 ProzorroRest is a test project for IT Contract
 
 ##API Description
+
 ||||
 | ------------- |:-------------:| :-----|
 | **URL**  | /endpoints | Returns json data about all endpointData  |
