@@ -17,11 +17,6 @@ env:
   global:
   - PGPORT=5432
 
-before_install:
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo mysql_upgrade -u root -ppassword
-  - sudo service psql restart
-
 before_script:
   - psql -c 'CREATE DATABASE IF NOT EXISTS ProzorroTest;' -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';;" -U postgres
