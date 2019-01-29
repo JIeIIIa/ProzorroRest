@@ -1,11 +1,11 @@
-#ProzorroRest
+# ProzorroRest
 
 [![Build Status](https://travis-ci.org/JIeIIIa/ProzorroRest.svg?branch=master)](https://travis-ci.org/JIeIIIa/ProzorroRest)
 [![Coverage Status](https://coveralls.io/repos/github/JIeIIIa/ProzorroRest/badge.svg?branch=master)](https://coveralls.io/github/JIeIIIa/ProzorroRest?branch=master)
 
-ProzorroRest is a test project for IT Contract
+ProzorroRest is a test project for IT Contract. See demo on: https://prozorro-rest.herokuapp.com/
 
-##API Description
+## API Description
 
 ||||
 | ------------- |:-------------:| :-----|
