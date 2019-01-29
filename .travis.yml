@@ -1,0 +1,39 @@
+language: java
+sudo: required
+
+jdk:
+  - oraclejdk8
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+env:
+  global:
+  - PGPORT=5432
+
+before_install:
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -ppassword
+  - sudo service psql restart
+
+before_script:
+  - psql -c 'CREATE DATABASE IF NOT EXISTS ProzorroTest;' -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD 'password';;" -U postgres
+
+script:
+  - mvn clean install -B
+
+after_script:
+  - echo "Script finished"
+
+after_success:
+  - echo "Build was successful. $TRAVIS_TEST_RESULT"
+
+after_failure:
+  - echo "Build was failed"

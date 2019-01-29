@@ -1,6 +1,6 @@
 #ProzorroRest
 
-ProzorroRest is a test project for PUBLIC BID
+ProzorroRest is a test project for IT Contract
 
 ##API Description
 ||||

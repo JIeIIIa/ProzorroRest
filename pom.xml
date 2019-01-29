@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>prozorro-rest</name>
-    <description>Test task for PUBLIC BID</description>
+    <description>Test task for IT Contract</description>
 
     <properties>
         <application.name>prozorro-rest</application.name>
