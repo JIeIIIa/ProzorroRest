@@ -30,6 +30,7 @@ script:
 
 after_script:
   - echo "Script finished"
+  - mvn coveralls:report
 
 after_success:
   - echo "Build was successful. $TRAVIS_TEST_RESULT"
