@@ -5,9 +5,11 @@ import com.gmail.onishchenko.oleksii.prozorrorest.entity.EndpointData;
 import java.util.List;
 
 public interface EndpointDataService {
-    EndpointData add(String endpoint);
+    EndpointData findById(Long id);
 
-    List<EndpointData> retrieveAll();
+    List<EndpointData> findAll();
+
+    EndpointData add(String endpoint);
 
     void delete(Long id);
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset reset_sequences="endpoint_data_id_seq, data_item_id_in_db_seq">
+    <endpoint_data
+            id="-100002"
+            endpoint="http:/pretty.endpoint"
+    />
+    <data_item
+            id_in_db="-100002"
+            dateModified="2018-10-08 15:13:06.456152"
+            datePublished="2018-10-08 15:13:06.456131"
+            description="WoW"
+            documentOf="2"
+            documentType="0"
+            format="2"
+            hash="md5:787caaf33e54d10e6cd302bce098564c"
+            id="c973e26efa78408c8cf7adbb3c2b11e5"
+            language="0"
+            relatedItem="related"
+            title="Додаткова угода.xlsx"
+            url="https://public-docs-sandbox.prozorro.gov.ua/get/69966a5cbdf94ea"
+            endpoint_data_id="-100002"
+    />
+
+    <endpoint_data
+            id="-100001"
+            endpoint="http:/should.be.deleted.endpoint"
+    />
+    <data_item
+            id_in_db="-100001"
+            hash="md5:9845633e54d10e6ce098564c"
+            description="some description"
+            format="2"
+            url="https://public-docs-sandbox.prozorro.gov.ua/get/33e54d10e6ce098564c"
+            documentOf="1"
+            datePublished="2018-10-08 15:13:06.456131"
+            dateModified="2018-10-08 15:13:06.456152"
+            documentType="1"
+            id="c973e26efa7987dfredbb3c2b11e5"
+            endpoint_data_id="-100001"
+    />
+
+    <endpoint_data
+            id="-100000"
+            endpoint="http:/should.be.updated.endpoint"
+    />
+    <data_item
+            id_in_db="-100000"
+            hash="md5:ce879e54d10e6ce098564c"
+            description="old description"
+            format="0"
+            url="https://public-docs-sandbox.prozorro.gov.ua/get/treyd10e6ce098564c"
+            documentOf="0"
+            datePublished="2018-11-12 15:13:06.456131"
+            dateModified="2018-11-12 15:13:06.456152"
+            documentType="0"
+            id="c973e26efa7987dfredbb3c2b11e5"
+            endpoint_data_id="-100000"
+    />
+
+</dataset>

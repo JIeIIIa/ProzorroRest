@@ -28,3 +28,9 @@ ProzorroRest is a test project for IT Contract. See demo on: https://prozorro-re
 | *Method* | DELETE        | |
 | *Required URL Params* | {id} | Long id |
 | *Success Response:*   | Code: 200 | |
+
+## Examples of endpoints
+
+* https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/23567e24f52746ef92c470be6059d193/documents 
+* https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/4805f381d48948b1b34d6ea2daa029a3/documents 
+* https://lb-api-sandbox.prozorro.gov.ua/api/2.4/contracts/47fa8764e1b74f4db58f84c9db460566/documents

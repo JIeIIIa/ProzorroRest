@@ -48,6 +48,22 @@ public class EndpointDataServiceImpl implements EndpointDataService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public EndpointData findById(Long id) {
+        LOG.traceEntry("id = {}", id);
+        return endpointDataJpaRepository
+                .findById(id)
+                .orElseThrow(() -> new ProzorroRestException("Entity not found"));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EndpointData> findAll() {
+        LOG.traceEntry();
+        return LOG.traceExit(endpointDataJpaRepository.findAll());
+    }
+
+    @Override
     @Transactional
     public EndpointData add(String endpoint) {
         LOG.traceEntry("{}", endpoint);
@@ -60,17 +76,10 @@ public class EndpointDataServiceImpl implements EndpointDataService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<EndpointData> retrieveAll() {
-        LOG.traceEntry();
-        return LOG.traceExit(endpointDataJpaRepository.findAll());
-    }
-
-    @Override
     @Transactional
     public void delete(Long id) {
         LOG.traceEntry("id = {}", id);
-        EndpointData endpointData = getEndpointData(id);
+        EndpointData endpointData = findById(id);
         endpointDataJpaRepository.delete(endpointData);
         LOG.traceExit("Data was deleted: id = {}", id);
     }
@@ -78,7 +87,7 @@ public class EndpointDataServiceImpl implements EndpointDataService {
     @Override
     public EndpointData update(Long id) {
         LOG.traceEntry("id = {}", id);
-        EndpointData endpointData = getEndpointData(id);
+        EndpointData endpointData = findById(id);
         ResponseDto responseDto = retrieve(endpointData.getEndpoint());
         endpointData.setData(responseDto.getData());
         return LOG.traceExit("Data was updated: {}", endpointDataJpaRepository.saveAndFlush(endpointData));
@@ -126,12 +135,5 @@ public class EndpointDataServiceImpl implements EndpointDataService {
             throw new ProzorroRestException("Validation data error");
         }
         LOG.debug("Response object is valid");
-    }
-
-    EndpointData getEndpointData(Long id) {
-        LOG.traceEntry("id = {}", id);
-        return endpointDataJpaRepository
-                .findById(id)
-                .orElseThrow(() -> new ProzorroRestException("Entity not found"));
     }
 }

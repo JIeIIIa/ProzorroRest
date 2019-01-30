@@ -179,6 +179,59 @@ class EndpointDataControllerTest {
         }
     }
 
+    @Nested
+    class FindById {
+        Long id;
+        MockHttpServletRequestBuilder get;
+
+        @BeforeEach
+        void setUp() {
+            id = 7L;
+            get = MockMvcRequestBuilders.get(URL + "/" + id);
+        }
+
+        @Test
+        void failure() throws Exception {
+            //Given
+            when(endpointDataService.findById(id)).thenThrow(ProzorroRestException.class);
+
+            //When
+            ResultActions perform = mockMvc.perform(get);
+
+            //Then
+            perform.andExpect(status().isBadRequest());
+        }
+
+        @Test
+        void success() throws Exception {
+            //Given
+            DataItem dataItem = DataItemBuilder.getInstance()
+                    .hash("qwerty")
+                    .idInDB(777L)
+                    .id("asdfgh")
+                    .build();
+
+            EndpointData endpointData = EndpointDataBuilder.getInstance()
+                    .id(id)
+                    .endpoint(ENDPOINT)
+                    .data(singletonList(dataItem))
+                    .build();
+            when(endpointDataService.findById(id)).thenReturn(endpointData);
+
+            //When
+            ResultActions perform = mockMvc.perform(get);
+
+            //Then
+            perform.andExpect(status().isOk())
+                    .andExpect(jsonPath("id", is(7)))
+                    .andExpect(jsonPath("endpoint", is(ENDPOINT)))
+                    .andExpect(jsonPath("data", hasSize(1)))
+                    .andExpect(jsonPath("data[0].hash", is("qwerty")))
+                    .andExpect(jsonPath("data[0].idInDB", is(777)))
+                    .andExpect(jsonPath("data[0].id", is("asdfgh")));
+        }
+    }
+
     @Test
     void all() throws Exception {
         //Given
@@ -192,7 +245,7 @@ class EndpointDataControllerTest {
                 .endpoint(ENDPOINT)
                 .data(singletonList(dataItem))
                 .build();
-        when(endpointDataService.retrieveAll()).thenReturn(singletonList(endpointData));
+        when(endpointDataService.findAll()).thenReturn(singletonList(endpointData));
         MockHttpServletRequestBuilder get = MockMvcRequestBuilders.get(URL);
 
         //When

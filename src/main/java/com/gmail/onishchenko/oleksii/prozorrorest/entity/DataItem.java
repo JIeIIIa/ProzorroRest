@@ -182,4 +182,23 @@ public class DataItem implements Serializable {
     public int hashCode() {
         return Objects.hash(hash, language, description, format, url, title, documentOf, datePublished, dateModified, documentType, id, relatedItem);
     }
+
+    @Override
+    public String toString() {
+        return "DataItem{" +
+                "idInDB=" + idInDB +
+                ", hash='" + hash + '\'' +
+                ", language=" + language +
+                ", description='" + description + '\'' +
+                ", format=" + format +
+                ", url='" + url + '\'' +
+                ", title='" + title + '\'' +
+                ", documentOf=" + documentOf +
+                ", datePublished=" + datePublished +
+                ", dateModified=" + dateModified +
+                ", documentType=" + documentType +
+                ", id='" + id + '\'' +
+                ", relatedItem='" + relatedItem + '\'' +
+                '}';
+    }
 }

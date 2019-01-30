@@ -4,7 +4,8 @@ var app = new Vue({
         return {
             endpointData: [],
             msg: '',
-            endpoint: ''
+            endpoint: '',
+            alertMessage: ''
         }
 
     },
@@ -12,6 +13,14 @@ var app = new Vue({
         setErrorMessage: function (message) {
             this.msg = message['error'];
             console.log('Message = ' + message);
+        },
+        openModalForm: function (msg) {
+            this.alertMessage = msg;
+            $('#modalCenter').modal('show');
+        },
+        closeModalForm: function () {
+            this.alertMessage = '';
+            $('#modalCenter').modal('hide');
         },
         loadData: function () {
             var ref = this;
@@ -48,6 +57,8 @@ var app = new Vue({
                 .then(function (response) {
                     if (response.status === 200) {
                         ref.endpointData.push(response.data);
+                        ref.endpoint = '';
+                        ref.openModalForm("Data was added");
                     } else {
                         ref.setErrorMessage(response.data);
                     }
@@ -68,6 +79,7 @@ var app = new Vue({
 
                         //Update object
                         ref.endpointData.splice(objIndex, 1, response.data);
+                        ref.openModalForm("Data was updated");
                     } else {
                         ref.setErrorMessage(response.data);
                     }
@@ -88,6 +100,7 @@ var app = new Vue({
 
                         //Update object
                         ref.endpointData.splice(objIndex, 1);
+                        ref.openModalForm("Data was deleted");
                     } else {
                         ref.setErrorMessage(response.data);
                     }

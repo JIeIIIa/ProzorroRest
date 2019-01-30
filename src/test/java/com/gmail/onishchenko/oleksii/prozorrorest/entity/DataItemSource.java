@@ -249,6 +249,7 @@ public interface DataItemSource {
                 new AbstractMap.SimpleImmutableEntry<>(
                         DataItemBuilder.getInstance()
                                 .hash("md5:dcc8b429838b29c8c6bbbd565b1f9b45")
+                                .description("qwerty")
                                 .format(Format.IMAGE_PNG)
                                 .url("https://public-docs-sandbox.prozorro.gov.ua" +
                                         "/get/010690c6dba24402851d4e40fea90eb5?KeyID=1331dc52&Signature=" +
@@ -263,6 +264,7 @@ public interface DataItemSource {
                                 .build(),
                         "{" +
                                 "\"hash\":\"md5:dcc8b429838b29c8c6bbbd565b1f9b45\"," +
+                                "\"description\":\"qwerty\"," +
                                 "\"format\":\"image/png\"," +
                                 "\"url\":\"https://public-docs-sandbox.prozorro.gov.ua" +
                                 "/get/010690c6dba24402851d4e40fea90eb5?KeyID=1331dc52&Signature=RT7pybVmIlXm3QA2yOTbFyxtKtUzdeyemepwOAgbtqSeHz66x2dlhx" +

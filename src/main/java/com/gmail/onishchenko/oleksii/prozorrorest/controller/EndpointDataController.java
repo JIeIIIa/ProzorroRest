@@ -47,12 +47,18 @@ public class EndpointDataController {
         return ResponseEntity.ok(endpointDataService.update(id));
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<EndpointData> findById(@PathVariable("id") Long id) {
+        LOG.traceEntry("id = {}", id);
+        return ResponseEntity.ok(endpointDataService.findById(id));
+    }
+
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseEntity<List<EndpointData>> all() {
+    public ResponseEntity<List<EndpointData>> findAll() {
         LOG.traceEntry("Retrieving all data");
-        List<EndpointData> list = endpointDataService.retrieveAll();
+        List<EndpointData> list = endpointDataService.findAll();
         LOG.debug("All data was retrieved");
         return ResponseEntity.ok(list);
     }
