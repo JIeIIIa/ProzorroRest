@@ -14,6 +14,26 @@
         [v-cloak] {
             display: none;
         }
+
+        .table-row-enter, .table-row-leave-to {
+            opacity: 0;
+            transform: translateX(-150%);
+            display: inline-flex;
+        }
+        .table-row-enter-active {
+            transition: all 0.5s;
+            display: inline-flex;
+        }
+        .table-row-leave-active {
+            transition: all .5s;
+            display: inline-flex;
+            position: absolute;
+        }
+        .table-row-move {
+            display: inline-flex;
+            transition: all 0.5s;
+        }
+
     </style>
 </head>
 <body>
@@ -65,8 +85,8 @@
                     <th scope="col" class="col">data</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="d-flex" v-for="(item, index) in endpointData">
+                <tbody name="table-row" is="transition-group">
+                <tr class="d-flex" v-for="(item, index) in endpointData" v-bind:key="item.id">
                     <th scope="row" class="col-1 text-center"> {{ item.id}}</th>
                     <td class="col-2" style="word-break: break-word;">
                         <div class="row">
@@ -84,11 +104,26 @@
                         </div>
                     </td>
                     <td class="col small-text" style="word-break: break-word;">
-                        <pre>{{ prettyJson(item.data) }}</pre>
+                        <pre class="pre-scrollable" style="overflow: scroll; max-width: 70vw;">
+                            {{ prettyJson(item.data) }}
+                        </pre>
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{ alertMessage }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="closeModalForm">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

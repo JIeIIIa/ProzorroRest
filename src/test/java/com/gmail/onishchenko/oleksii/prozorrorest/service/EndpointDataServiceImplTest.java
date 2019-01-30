@@ -113,7 +113,7 @@ class EndpointDataServiceImplTest {
     }
 
     @Test
-    void retrieveAll() {
+    void FindAll() {
         //Given
         final DataItem first = DataItemBuilder.getInstance().id("1234567").build();
         final DataItem second = DataItemBuilder.getInstance().id("7654321").build();
@@ -133,7 +133,7 @@ class EndpointDataServiceImplTest {
         ).when(endpointDataJpaRepository).findAll();
 
         //When
-        List<EndpointData> result = instance.retrieveAll();
+        List<EndpointData> result = instance.findAll();
 
         //Then
         assertThat(result).isNotNull()
@@ -155,15 +155,15 @@ class EndpointDataServiceImplTest {
         }
 
         @Test
-        void errorRetrievingData() {
+        void idIsNotPresentInDatabase() {
             //Given
-            doThrow(new ProzorroRestException()).when(spy).getEndpointData(any(Long.class));
+            doThrow(new ProzorroRestException()).when(spy).findById(any(Long.class));
 
             //When
-            assertThrows(ProzorroRestException.class, () -> spy.getEndpointData(id));
+            assertThrows(ProzorroRestException.class, () -> spy.findById(id));
 
             //Then
-            verify(spy).getEndpointData(eq(id));
+            verify(spy).findById(eq(id));
         }
 
         @Test
@@ -175,7 +175,7 @@ class EndpointDataServiceImplTest {
                     .endpoint(ENDPOINT)
                     .data(singletonList(dataItem))
                     .build();
-            doReturn(endpointData).when(spy).getEndpointData(eq(id));
+            doReturn(endpointData).when(spy).findById(eq(id));
 
             //When
             spy.delete(id);
@@ -198,15 +198,15 @@ class EndpointDataServiceImplTest {
         }
 
         @Test
-        void errorGetEndpointData() {
+        void idIsNotPresentInDatabase() {
             //Given
-            doThrow(new ProzorroRestException()).when(spy).getEndpointData(any(Long.class));
+            doThrow(new ProzorroRestException()).when(spy).findById(any(Long.class));
 
             //When
-            assertThrows(ProzorroRestException.class, () -> spy.getEndpointData(id));
+            assertThrows(ProzorroRestException.class, () -> spy.findById(id));
 
             //Then
-            verify(spy).getEndpointData(eq(id));
+            verify(spy).findById(eq(id));
         }
 
         @Test
@@ -218,7 +218,7 @@ class EndpointDataServiceImplTest {
                     .endpoint(ENDPOINT)
                     .data(singletonList(dataItem))
                     .build();
-            doReturn(endpointData).when(spy).getEndpointData(eq(id));
+            doReturn(endpointData).when(spy).findById(eq(id));
             doThrow(ProzorroRestException.class).when(spy).retrieve(ENDPOINT);
 
 
@@ -226,7 +226,7 @@ class EndpointDataServiceImplTest {
             assertThrows(ProzorroRestException.class, () -> spy.update(id));
 
             //Then
-            verify(spy).getEndpointData(eq(id));
+            verify(spy).findById(eq(id));
             verify(spy).retrieve(ENDPOINT);
         }
 
@@ -246,7 +246,7 @@ class EndpointDataServiceImplTest {
                     .endpoint(ENDPOINT)
                     .data(singletonList(dataItem))
                     .build();
-            doReturn(endpointData).when(spy).getEndpointData(eq(id));
+            doReturn(endpointData).when(spy).findById(eq(id));
             doReturn(responseDto).when(spy).retrieve(ENDPOINT);
             when(endpointDataJpaRepository.saveAndFlush(any(EndpointData.class)))
                     .thenAnswer(invocationOnMock -> invocationOnMock.getArguments()[0]);
@@ -257,7 +257,7 @@ class EndpointDataServiceImplTest {
             //Then
             assertThat(result).isNotNull()
                     .isEqualTo(expected);
-            verify(spy).getEndpointData(eq(id));
+            verify(spy).findById(eq(id));
             verify(spy).retrieve(ENDPOINT);
             verify(endpointDataJpaRepository, times(1)).saveAndFlush(eq(expected));
             verifyNoMoreInteractions(endpointDataJpaRepository, okHttpClient);
@@ -381,7 +381,7 @@ class EndpointDataServiceImplTest {
     }
 
     @Nested
-    class GetEndpointData {
+    class FindById {
         @Test
         void failure() {
             //Given
@@ -389,7 +389,7 @@ class EndpointDataServiceImplTest {
             when(endpointDataJpaRepository.findById(id)).thenReturn(Optional.empty());
 
             //When
-            assertThrows(ProzorroRestException.class, () -> instance.getEndpointData(id));
+            assertThrows(ProzorroRestException.class, () -> instance.findById(id));
 
             //Then
             verify(endpointDataJpaRepository, times(1)).findById(id);
@@ -405,7 +405,7 @@ class EndpointDataServiceImplTest {
             when(endpointDataJpaRepository.findById(id)).thenReturn(ofNullable(endpointData));
 
             //When
-            EndpointData result = instance.getEndpointData(id);
+            EndpointData result = instance.findById(id);
 
             //Then
             assertThat(result).isNotNull()
